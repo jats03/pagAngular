@@ -1,0 +1,48 @@
+<main class="container py-4">
+  <h1 class="text-center fw-bold">ACTIVIDADES</h1>
+
+  <section>
+    <div *ngFor="let actividad of actividades" class="mb-4">
+      <h2 class="d-flex align-items-center justify-content-between">
+        {{ actividad.titulo }}
+        <span class="text-danger fs-4" (click)="eliminarActividad(actividad.id)">
+          <i class="fas fa-trash"></i>
+        </span>
+      </h2>
+      <div class="d-flex border p-3 rounded align-items-stretch">
+        <img [src]="'http://localhost:8080/' + actividad.UrlImagen" class="me-3 flex-shrink-0" style="width: 200px; height: 250px">
+        <div class="border p-2 w-100 d-flex" style="overflow-wrap: break-word">
+          <p class="m-0 text-break w-100">{{ actividad.descripcion }}</p>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="this.actividades.length == 0" class="py-5">
+      <h2 class="d-flex align-items-center justify-content-center">
+        Nuevas actividades próximamente...
+      </h2>
+    </div>
+  </section>
+
+  <div *ngIf="isLoggedIn" class="card shadow-sm mx-auto" style="max-width: 28rem;">
+    <div class="card-body">
+      <h2 class="card-title fs-5 fw-semibold">Añadir Nueva Actividad</h2>
+      <form (ngSubmit)="agregarActividad()" enctype="multipart/form-data" class="d-flex flex-column gap-3">
+        <div>
+          <label for="titulo" class="form-label fw-medium">Título</label>
+          <input type="text" id="titulo" [(ngModel)]="nuevaActividad.titulo" name="titulo" required
+            class="form-control">
+        </div>
+        <div>
+          <label for="descripcion" class="form-label fw-medium">Descripción</label>
+          <textarea id="descripcion" [(ngModel)]="nuevaActividad.descripcion" name="descripcion" required
+            class="form-control"></textarea>
+        </div>
+        <div>
+          <label for="UrlImagen" class="form-label fw-medium">Imagen</label>
+          <input type="file" id="UrlImagen" (change)="onFileSelected($event)" required class="form-control">
+        </div>
+        <button type="submit" class="btn btn-dark w-100">Añadir Actividad</button>
+      </form>
+    </div>
+  </div>
+</main>

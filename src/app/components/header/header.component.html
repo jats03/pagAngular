@@ -1,0 +1,47 @@
+<header class="text-white">
+  <section class="container d-flex justify-content-between align-items-center py-3">
+    <section class="logo">
+      <img src="https://usercontent.one/wp/www.afais-jaen.es/wp-content/uploads/2019/12/slide-image-2.png"
+        class="img-fluid" style="max-width: 300px; height: auto;" />
+    </section>
+    <section class="accesos d-flex gap-3">
+      <a href="#" class="btn btn-outline-light fw-bold">HAZTE SOCIO/A</a>
+      <a routerLink="/areaPrivada" class="btn btn-outline-light fw-bold">ÁREA PRIVADA</a>
+      <div *ngIf="isLoggedIn" class="align-content-center">
+        <button (click)="this.authService.logout()" class="d-flex align-items-center fw-bold">CERRAR SESIÓN</button>
+      </div>
+    </section>
+  </section>
+
+  <nav class="container-fluid pb-3">
+    <ul class="nav nav-pills justify-content-evenly w-100 gap-20">
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/inicio" routerLinkActive="activo">INICIO</a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          QUIÉNES SOMOS
+        </a>
+        <ul class="dropdown-menu border-0" style="background-color: green;">
+          <li><a class="dropdown-item text-white" routerLink="/mision-fines">MISIÓN Y FINES</a></li>
+          <li><a class="dropdown-item text-white" routerLink="/organigrama">ORGANIGRAMA</a></li>
+          <li><a class="dropdown-item text-white" routerLink="/objetivos">OBJETIVOS</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/proyectos" routerLinkActive="activo">PROYECTOS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/actividades" routerLinkActive="activo">ACTIVIDADES</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/galeria" routerLinkActive="activo">GALERÍA</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/contacto" routerLinkActive="activo">CONTACTO</a>
+      </li>
+    </ul>
+  </nav>
+</header>
