@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:8080/AFAIS'; // URL del backend en Spring Boot
+  private apiUrl = 'https://backend-asociaciontfg.onrender.com/AFAIS'; // URL del backend en Spring Boot
 
   constructor(private http: HttpClient) {}
 
