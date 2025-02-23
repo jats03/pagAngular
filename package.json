@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "postinstall": "npm install --force"
+    "postinstall": "npm install --legacy-peer-deps"
   },
   "private": true,
   "dependencies": {
@@ -21,7 +21,7 @@
     "@angular/router": "^19.1.0",
     "@fortawesome/fontawesome-free": "^6.7.2",
     "bootstrap": "^5.3.3",
-    "ng-recaptcha": "^13.2.1",
+    "ng-recaptcha-2": "^15.0.3-rc2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
