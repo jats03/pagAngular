@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 export class ContactoComponent {
   recaptchaResponse: string = '';
   mensajeExito: boolean = false;
+  mensajeEnviado: boolean = false;
 
   onCaptchaResolved(response: string | null) {
     this.recaptchaResponse = response ?? '';
@@ -23,6 +24,8 @@ export class ContactoComponent {
 
   enviarFormulario(form: NgForm) {
     if (form.invalid) return; // Evita enviar si el formulario es inválido
+
+    this.mensajeEnviado = true;
 
     // Crear FormData
     const formData = new FormData();

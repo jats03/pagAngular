@@ -10,9 +10,17 @@ export class AuthService{
 
   private authState = new BehaviorSubject<boolean>(this.hasToken());
 
+  isAdmin = new BehaviorSubject<boolean>(false);
+  tokenAdmin: any;
+
   checkLoginStatus() {
     console.log("save token: " + this.getToken());
     this.authState.next(this.hasToken()); // ✅ Verifica si hay sesión activa
+    if ( localStorage.getItem("token") == this.tokenAdmin ) {
+      this.isAdmin.next(true);
+    } else {
+      this.isAdmin.next(false);
+    }
   }
 
   constructor(private router: Router) {}
@@ -21,6 +29,10 @@ export class AuthService{
     console.log("save token: " + this.getToken());
     localStorage.setItem("token",token);
     this.authState.next(true);
+  }
+
+  saveTokenAdmin() {
+    this.tokenAdmin = localStorage.getItem("token");
   }
 
   getToken() {
@@ -35,10 +47,16 @@ export class AuthService{
     return this.authState;
   }
 
+  isAdminLogged() {
+    return this.isAdmin;
+  }
+
   logout() {
     console.log("[logout] token = " + this.getToken()?.length);
     localStorage.removeItem("token");
+    this.tokenAdmin = null;
     this.authState.next(false);
+    this.isAdmin.next(false);
     this.router.navigate(['/admin/login']);
   }
 }

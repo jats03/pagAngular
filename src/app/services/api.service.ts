@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'https://backend-asociaciontfg.onrender.com/AFAIS'; // URL del backend en Spring Boot
+  private apiUrl = 'http://localhost:8080/AFAIS'; // URL del backend en Spring Boot
 
   constructor(private http: HttpClient) {}
 
@@ -26,4 +26,30 @@ export class ApiService {
   eliminarDatos(url: string) {
     return this.http.delete(`${this.apiUrl}/`+url)
   }
+
+  actualizarDatos(url: string, data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${url}`, data);
+  }
+
+  subirDocumento(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(`${this.apiUrl}/documento`, formData);
+  }
+
+  descargarDocumento(id: number): Observable<Blob> {
+    const url = `${this.apiUrl}/documento/${id}`;
+    return this.http.get(url, { responseType: 'blob' }); // Recibe el archivo como Blob
+  }
+
+  getImage(urlGet: string): Observable<Blob> {
+    const url = `${this.apiUrl}/${urlGet}`;
+    return this.http.get(url, { responseType: 'blob' });
+  }
+
+  post(endpoint: string, data: any) {
+    return this.http.post<any>(`${this.apiUrl}/${endpoint}`, data);
+  }
+
+
 }

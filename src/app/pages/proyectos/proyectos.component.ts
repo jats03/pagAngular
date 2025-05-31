@@ -81,4 +81,29 @@ export class ProyectosComponent implements OnInit {
     }
   }
 
+  editarProyecto(proyecto: any): void {
+    proyecto.editando = true; // Habilitar el modo de edición
+  }
+
+  guardarEdicion(proyecto: any): void {
+    this.apiService.actualizarDatos(`proyectos/${proyecto.id}`, {
+        id: proyecto.id,
+        titulo: proyecto.titulo,
+        descripcion: proyecto.descripcion
+    }).subscribe(
+      () => {
+        proyecto.editando = false; // Deshabilitar el modo de edición
+        this.cargarProyectos();
+      },
+      (error) => {
+        console.error('Error al actualizar el proyecto', error);
+      }
+    );
+  }
+
+
+  getImage(id: number): string {
+    return `http://localhost:8080/AFAIS/proyectos/${id}/imagen`;
+  }
+
 }

@@ -55,3 +55,8 @@ header {
 .dropdown-menu li:last-child {
   margin-bottom: 0;
 }
+
+.btn{
+  cursor: pointer;
+  border: 0px;
+}

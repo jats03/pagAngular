@@ -1,5 +1,5 @@
+import { ApiService } from './../../services/api.service';
 import { Component, AfterViewInit, Renderer2, ElementRef, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api.service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 
@@ -13,10 +13,15 @@ export class InicioComponent implements AfterViewInit, OnInit {
 
   datos: any = [];
 
-  constructor(private renderer: Renderer2, private el: ElementRef, public authService: AuthService) {}
+  isLoggedIn: boolean = false;
+
+  constructor(private renderer: Renderer2, private el: ElementRef, public authService: AuthService, public apiService: ApiService) {}
 
   ngOnInit() {
     this.authService.checkLoginStatus();
+    this.authService.isLoggedIn().subscribe(status => {
+        this.isLoggedIn = status;
+    });
   }
 
   ngAfterViewInit() {
@@ -37,9 +42,9 @@ export class InicioComponent implements AfterViewInit, OnInit {
   }
 
   private processInstagramEmbeds() {
-  if ((window as any).instgrm && (window as any).instgrm.Embeds) {
-    (window as any).instgrm.Embeds.process();
+    if ((window as any).instgrm && (window as any).instgrm.Embeds) {
+      (window as any).instgrm.Embeds.process();
+    }
   }
-}
 
 }

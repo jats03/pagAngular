@@ -12,7 +12,7 @@
 
         <div *ngIf="todasImagenes.length <= 2" class="d-flex justify-content-center gap-3">
           <div class="position-relative" *ngFor="let img of todasImagenes" style="width: 256px; height: 350px;">
-            <img class="rounded" [src]="'http://localhost:8080/' + img.urlImagen" style="width: 256px; height: 100%;">
+            <img class="rounded" [src]="getImage(img.id)" style="width: 256px; height: 100%;">
             <span *ngIf="isLoggedIn" class="position-absolute top-0 end-0 text-danger fs-4 p-2" (click)="eliminarImagen(img.id)">
               <i class="fas fa-trash"></i>
             </span>
@@ -36,7 +36,7 @@
                 [style.width.px]="totalSlides * slideWidth" #slidesContainer>
                 <div class="position-relative" *ngFor="let img of imagenes" style="width: 256px; height: 350px">
                   <div style="width: 256px; height: 100%">
-                    <img class="rounded" [src]="'http://localhost:8080/' + img.urlImagen" style="width:256px; height: 100%">
+                    <img class="rounded" [src]="getImage(img.id)" style="width:256px; height: 100%">
                     <span *ngIf="isLoggedIn" class="position-absolute top-0 end-0 text-danger fs-4 p-2" (click)="eliminarImagen(img.id)">
                       <i class="fas fa-trash"></i>
                     </span>

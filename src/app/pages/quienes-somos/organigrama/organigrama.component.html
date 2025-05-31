@@ -35,17 +35,123 @@
     </div>
   </div>
 
-  <div class="junta-directiva">
-    <h2>Composición de la Junta Directiva</h2>
-    <ul>
-      <li>Presidenta: Rocío Fernández Castro.</li>
-      <li>Vicepresidenta: Lucía Romero Molina.</li>
-      <li>Secretario: Luis Manuel Latorre Pulgar.</li>
-      <li>Tesorera: Ana María Denia Ortega.</li>
-      <li>Vocal: Gema Torres Cano.</li>
-      <li>Vocal: Juan Carlos Murillo Ridao.</li>
-      <li>Vocal: María Dolores Martos Garrido.</li>
+  <h1 class="encabezados pt-5">FUNCIONES POR ÁREAS</h1>
+
+  <div class="container mt-4">
+    <table class="table table-bordered text-center align-middle" style="border: 2px solid #8A9B68;">
+      <thead class="table-success">
+        <tr style="border: 2px solid #8A9B68;">
+          <th style="background-color: #FBC397; border: 2px solid #8A9B68;">Trabajo Social</th>
+          <th style="background-color: #FBC397; border: 2px solid #8A9B68;">Formación</th>
+          <th style="background-color: #FBC397; border: 2px solid #8A9B68;">Atención Temprana y Logopedia</th>
+          <th style="background-color: #FBC397; border: 2px solid #8A9B68;">Atención y Apoyo a Familias</th>
+          <th style="background-color: #FBC397; border: 2px solid #8A9B68;">Voluntariado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="border: 2px solid #8A9B68;">
+            • Solicitud, ejecución y justificación de ayudas y subvenciones <br>
+            • Gestión de ayudas institucionales <br>
+            • Servicio de orientación e información a familias (SOI) <br>
+            • Redes sociales y página web <br>
+            • Difusión en sanidad, educación y servicios sociales
+          </td>
+          <td style="border: 2px solid #8A9B68;">
+            • Escuela de familias <br>
+            • Talleres de inteligencia emocional <br>
+            • Talleres de Habilidades Sociales <br>
+            • Formación a voluntarios <br>
+            • Charlas a institutos <br>
+            • Actividades de Ocio y Tiempo libre
+          </td>
+          <td style="border: 2px solid #8A9B68;">
+            • Valoración inicial a niños/as <br>
+            • Sesiones de logopedia <br>
+            • Asesoramiento <br>
+            • Sensibilización y difusión en salud <br>
+            • Gestión de demandas de necesidades educativas y sanitarias <br>
+            • Formación a docentes de alumnado con discapacidad auditiva
+          </td>
+          <td style="border: 2px solid #8A9B68;">
+            • Atención, orientación y Apoyo a familias <br>
+            • Difusión en sanidad, educación y servicios sociales <br>
+            • Acogida a nuevas familias <br>
+            • Orientación y apoyo emocional a familias <br>
+            • Becas NEE <br>
+            • Redes sociales y página web
+          </td>
+          <td style="border: 2px solid #8A9B68;">
+            • Interpretación en LSE. <br>
+            • Apoyo en la formación <br>
+            • Apoyo en actividades de ocio y tiempo libre. <br>
+            • Padres guía: Acogida a nuevas familias.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mt-5">
+    <h2 class="text-dark" *ngIf="!organigramaVacio() || isLoggedIn">Composición de la Junta Directiva y Equipo Técnico</h2>
+    <ul class="list-group list-group-flush fs-5">
+      <li class="list-group-item" *ngIf="(organigramas.cargo1 && organigramas.cargo1.trim() !== '') || editando">
+        <input *ngIf="editando" [(ngModel)]="organigramas.cargo1" class="form-control d-inline w-auto" />
+        <span *ngIf="!editando">{{ organigramas.cargo1 }}</span>
+      </li>
+      <li class="list-group-item" *ngIf="(organigramas.cargo2 && organigramas.cargo2.trim() !== '') || editando">
+        <input *ngIf="editando" [(ngModel)]="organigramas.cargo2"
+          class="form-control d-inline w-auto" />
+        <span *ngIf="!editando">{{ organigramas.cargo2 }}</span>
+      </li>
+      <li class="list-group-item" *ngIf="(organigramas.cargo3 && organigramas.cargo3.trim() !== '') || editando">
+        <input *ngIf="editando" [(ngModel)]="organigramas.cargo3" class="form-control d-inline w-auto" />
+        <span *ngIf="!editando">{{ organigramas.cargo3 }}</span>
+      </li>
+      <li class="list-group-item" *ngIf="(organigramas.cargo4 && organigramas.cargo4.trim() !== '') || editando">
+        <input *ngIf="editando" [(ngModel)]="organigramas.cargo4" class="form-control d-inline w-auto" />
+        <span *ngIf="!editando">{{ organigramas.cargo4 }}</span>
+      </li>
+      <li class="list-group-item" *ngIf="(organigramas.cargo5 && organigramas.cargo5.trim() !== '') || editando">
+        <input *ngIf="editando" [(ngModel)]="organigramas.cargo5" class="form-control d-inline w-auto" />
+        <span *ngIf="!editando">{{ organigramas.cargo5 }}</span>
+      </li>
+      <li class="list-group-item" *ngIf="(organigramas.cargo6 && organigramas.cargo6.trim() !== '') || editando">
+        <input *ngIf="editando" [(ngModel)]="organigramas.cargo6" class="form-control d-inline w-auto" />
+        <span *ngIf="!editando">{{ organigramas.cargo6 }}</span>
+      </li>
+      <li class="list-group-item" *ngIf="(organigramas.cargo7 && organigramas.cargo7.trim() !== '') || editando">
+        <input *ngIf="editando" [(ngModel)]="organigramas.cargo7" class="form-control d-inline w-auto" />
+        <span *ngIf="!editando">{{ organigramas.cargo7 }}</span>
+      </li>
+      <li class="list-group-item" *ngIf="(organigramas.cargo8 && organigramas.cargo8.trim() !== '') || editando">
+        <input *ngIf="editando" [(ngModel)]="organigramas.cargo8" class="form-control d-inline w-auto" />
+        <span *ngIf="!editando">{{ organigramas.cargo8 }}</span>
+      </li>
+      <li class="list-group-item" *ngIf="(organigramas.cargo9 && organigramas.cargo9.trim() !== '') || editando">
+        <input *ngIf="editando" [(ngModel)]="organigramas.cargo9" class="form-control d-inline w-auto" />
+        <span *ngIf="!editando">{{ organigramas.cargo9 }}</span>
+      </li>
+      <li class="list-group-item" *ngIf="(organigramas.cargo10 && organigramas.cargo10.trim() !== '') || editando">
+        <input *ngIf="editando" [(ngModel)]="organigramas.cargo10" class="form-control d-inline w-auto" />
+        <span *ngIf="!editando">{{ organigramas.cargo10 }}</span>
+      </li>
+      <li class="list-group-item" *ngIf="(organigramas.cargo11 && organigramas.cargo11.trim() !== '') || editando">
+        <input *ngIf="editando" [(ngModel)]="organigramas.cargo11" class="form-control d-inline w-auto" />
+        <span *ngIf="!editando">{{ organigramas.cargo11 }}</span>
+      </li>
     </ul>
   </div>
+
+  <div class="mt-4 text-start">
+    <button *ngIf="isLoggedIn && !editando" class="btn btn-warning px-4 py-2" (click)="editarInfo()">
+      <i class="bi bi-pencil-square"></i> Editar
+    </button>
+    <button *ngIf="isLoggedIn && editando" class="btn btn-success px-4 py-2 me-2" (click)="guardarEdicion(organigramas)">
+      <i class="bi bi-save"></i> Guardar
+    </button>
+  </div>
+
+  <p *ngIf="mensajeError" class="text-danger mt-3 fw-bold fs-5">{{ mensajeError }}</p>
 </main>
 

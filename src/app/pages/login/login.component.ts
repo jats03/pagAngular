@@ -1,35 +1,50 @@
-import { Component, NgModule } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
+import { AuthService } from '../../services/auth.service';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, FormsModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  imports: [FormsModule,CommonModule]
 })
 export class LoginComponent {
-  usuario = '';
-  password = '';
-  errorMessage = '';
+  usuario: string = '';
+  password: string = '';
+  errorMessage: string = '';
 
-
-  constructor(private apiService: ApiService, private router: Router, private authService: AuthService) {}
+  constructor(
+    private apiService: ApiService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   login() {
-    this.apiService.login("admin/login", this.usuario,this.password).subscribe(
-      (response) => {
-        console.log("bien")
-          this.authService.saveToken(response);
-          this.router.navigate(['inicio']);  // Redirige a la página protegida
-      },
-      (error) => {
-        this.errorMessage = 'Credenciales incorrectas. Intenta nuevamente.'}
-    )
-    };
+    this.apiService.login("auth/login", this.usuario, this.password).subscribe({
+      next: (response) => {
+        const token = response.token;
+        this.authService.saveToken(token);
 
+        // Opcional: redireccionar según rol
+        const decodedToken = JSON.parse(atob(token.split('.')[1]));
+        const roles = decodedToken.roles || decodedToken.authorities;
+
+        if (roles.includes("ROLE_ADMIN")) {
+          this.authService.saveTokenAdmin();
+          this.authService.isAdmin.next(true);
+          this.router.navigate(['/admin']);
+        } else {
+          this.router.navigate(['/editor']);
+        }
+      },
+      error: (err) => {
+        this.errorMessage = 'Usuario o contraseña incorrectos';
+      }
+    });
+  }
 }
+
 

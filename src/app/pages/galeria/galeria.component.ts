@@ -173,4 +173,9 @@ export class GaleriaComponent implements OnInit, AfterViewInit {
       );
     }
   }
+
+  getImage(id: number): string {
+    return `http://localhost:8080/AFAIS/imagenesGaleria/${id}`;
+  }
+
 }

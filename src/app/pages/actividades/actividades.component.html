@@ -1,25 +1,35 @@
 <main class="container py-4">
   <h1 class="text-center fw-bold">ACTIVIDADES</h1>
 
-  <section>
-    <div *ngFor="let actividad of actividades" class="mb-4">
+  <div *ngIf="this.actividades.length == 0" class="py-5">
+    <h2 class="d-flex align-items-center justify-content-center">
+      Nuevas actividades próximamente...
+    </h2>
+  </div>
+
+  <section class="px-5">
+    <div *ngFor="let actividad of actividades" class="mb-4 mt-4">
       <h2 class="d-flex align-items-center justify-content-between">
-        {{ actividad.titulo }}
-        <span class="text-danger fs-4" (click)="eliminarActividad(actividad.id)">
-          <i class="fas fa-trash"></i>
+        <span *ngIf="!actividad.editando">{{ actividad.titulo }}</span>
+        <input *ngIf="isLoggedIn && actividad.editando" [(ngModel)]="actividad.titulo" class="form-control" />
+
+        <span *ngIf="isLoggedIn">
+          <i *ngIf="!actividad.editando" class="fas fa-edit text-warning fs-4 me-2" (click)="editarActividad(actividad)"></i>
+          <i class="fas fa-trash text-danger fs-4" (click)="eliminarActividad(actividad.id)"></i>
         </span>
       </h2>
+
       <div class="d-flex border p-3 rounded align-items-stretch">
-        <img [src]="'http://localhost:8080/' + actividad.UrlImagen" class="me-3 flex-shrink-0" style="width: 200px; height: 250px">
-        <div class="border p-2 w-100 d-flex" style="overflow-wrap: break-word">
-          <p class="m-0 text-break w-100">{{ actividad.descripcion }}</p>
+        <img [src]="getImage(actividad.id)" class="me-3 flex-shrink-0"
+          style="width: 200px; height: 200px">
+
+        <div class="border p-2 w-100 d-flex flex-column">
+          <p *ngIf="!actividad.editando" class="m-0 text-break w-100" style="white-space: pre-wrap">{{ actividad.descripcion }}</p>
+          <textarea *ngIf="isLoggedIn && actividad.editando" [(ngModel)]="actividad.descripcion" class="form-control"></textarea>
         </div>
       </div>
-    </div>
-    <div *ngIf="this.actividades.length == 0" class="py-5">
-      <h2 class="d-flex align-items-center justify-content-center">
-        Nuevas actividades próximamente...
-      </h2>
+
+      <button *ngIf="isLoggedIn && actividad.editando" class="btn btn-success mt-2" (click)="guardarEdicion(actividad)">Guardar</button>
     </div>
   </section>
 
@@ -30,7 +40,7 @@
         <div>
           <label for="titulo" class="form-label fw-medium">Título</label>
           <input type="text" id="titulo" [(ngModel)]="nuevaActividad.titulo" name="titulo" required
-            class="form-control">
+            class="form-control" autocomplete="off">
         </div>
         <div>
           <label for="descripcion" class="form-label fw-medium">Descripción</label>

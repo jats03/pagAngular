@@ -1,3 +1,4 @@
+import { AuthGuard } from './../../services/auth.guard';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule, Location } from '@angular/common';
@@ -12,16 +13,18 @@ import { AuthService } from '../../services/auth.service';
 export class HeaderComponent implements OnInit{
 
     isLoggedIn: boolean = false;
+    isAdmin: boolean = false;
 
-    constructor(public authService: AuthService) {}
+    constructor(public authService: AuthService, public authGuard: AuthGuard) {}
 
     ngOnInit() {
-      console.log("ngOnInit [Header]")
       this.authService.checkLoginStatus();
       this.authService.isLoggedIn().subscribe(status => {
         this.isLoggedIn = status;
       });
-      console.log("ngOnInit - " + this.isLoggedIn);
+      this.authService.isAdminLogged().subscribe(status => {
+        this.isAdmin = status;
+      })
     }
 
     logout() {

@@ -84,4 +84,30 @@ export class ActividadesComponent implements OnInit {
     }
   }
 
+
+  editarActividad(actividad: any): void {
+    actividad.editando = true; // Habilitar el modo de edición
+  }
+
+  guardarEdicion(actividad: any): void {
+    console.log("actividad: id = " +actividad.id+"; titulo = " + actividad.titulo);
+    this.apiService.actualizarDatos(`actividades/${actividad.id}`, {
+        id: actividad.id,
+  titulo: actividad.titulo,
+  descripcion: actividad.descripcion
+    }).subscribe(
+      () => {
+        actividad.editando = false; // Deshabilitar el modo de edición
+        this.cargarActividades();
+      },
+      (error) => {
+        console.error('Error al actualizar la actividad', error);
+      }
+    );
+  }
+
+  getImage(id: number): string {
+    return `http://localhost:8080/AFAIS/actividades/${id}/imagen`;
+  }
+
 }

@@ -7,11 +7,20 @@ main .formContacto {
   font-size: 15px;
 }
 
+main .formContacto form textarea {
+  resize: none;
+}
+
 main .formContacto .lineaVertical {
-  grid-area: linea;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
   border-right: 1px solid black;
-  justify-items: start;
-  align-content: end;
+}
+
+main .formContacto .lineaVertical .info {
+  padding: 20px 0px 0px 0px;
+  align-self: start;
 }
 
 main .formContacto .lineaVertical div {
@@ -45,9 +54,9 @@ main .formContacto form textarea {
 main .formContacto form .enviar {
   display: flex;
   justify-content: center;
-  width: 70px;
+  width: 100px;
   margin-top: 10px;
-  height: 25px;
+  height: 35px;
   font-size: 15px;
   border: 1px solid black;
   border-radius: 5px;

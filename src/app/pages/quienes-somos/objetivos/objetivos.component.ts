@@ -55,7 +55,7 @@ export class ObjetivosComponent {
     );
   }
 
-    eliminarObjetivo(id: number): void {
+  eliminarObjetivo(id: number): void {
     if (confirm('¿Estás seguro de que quieres eliminar este objetivo?')) {
       this.apiService.eliminarDatos(`objetivos/${id}`).subscribe(
         () => {
@@ -68,5 +68,26 @@ export class ObjetivosComponent {
         }
       );
     }
+  }
+
+  editarObjetivo(objetivo: any): void {
+      objetivo.editando = true; // Habilitar el modo de edición
+  }
+
+  guardarEdicion(objetivo: any): void {
+    console.log("objetivo: id = " +objetivo.id+"; titulo = " + objetivo.titulo);
+    this.apiService.actualizarDatos(`objetivos/${objetivo.id}`, {
+        id: objetivo.id,
+        titulo: objetivo.titulo,
+        descripcion: objetivo.descripcion
+    }).subscribe(
+      () => {
+        objetivo.editando = false; // Deshabilitar el modo de edición
+        this.cargarObjetivos();
+      },
+      (error) => {
+        console.error('Error al actualizar el objetivo', error);
+      }
+    );
   }
 }
